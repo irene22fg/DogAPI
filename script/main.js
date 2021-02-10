@@ -1,8 +1,19 @@
 const client = new XMLHttpRequest();
 
 let boton = document.getElementsByTagName("button")[0];
-boton.addEventListener('click', pruebaXHR);
+boton.addEventListener('click', optionAJAX);
 let img = document.getElementsByTagName("img")[0];
+
+function optionAJAX(){
+    let option = $('input[name="option"]:checked').val();
+
+    if(option == "XHR")
+        pruebaXHR();
+    else if(option == "fetch")
+        pruebaFetch();
+    else
+        pruebaJQuery();
+}
 
 function pruebaXHR() {
 
@@ -13,6 +24,8 @@ function pruebaXHR() {
     }
     client.open("GET", "https://dog.ceo/api/breeds/image/random", true);
     client.send();
+
+    console.log("Mostrado por peticion XHR");
 }
 
 function pruebaJQuery() {
@@ -31,6 +44,8 @@ function pruebaJQuery() {
             console.log("complete");
         }
     });
+
+    console.log("Mostrado por peticion JQuery");
 }
 
 async function pruebaFetch(){
@@ -45,4 +60,6 @@ async function pruebaFetch(){
         .catch(error =>{
             console.log(error);
         });
+
+        console.log("Mostrado por peticion Fetch");
 }
